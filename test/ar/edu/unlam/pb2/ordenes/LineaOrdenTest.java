@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class LineaOrdenTest {
 	@Test
-	public void queSePuedeCalcularElTotalPorDetalle() {		
+	public void queSePuedeCalcularElTotalPorDetalle() {
 	}
 	
 }

@@ -1,49 +1,89 @@
 package ar.edu.unlam.pb2.ordenes;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /*
- * Mantiene una colección de Productos, los cuales no pueden
- * estar duplicados. Además, por cada Producto se desea mantener 
+ * Mantiene una colecciï¿½n de Productos, los cuales no pueden
+ * estar duplicados. Ademï¿½s, por cada Producto se desea mantener 
  * la cantidad del mismo en Stock,
  */
 public class Catalogo {
-	
+
 	/*
-	 * ¿Cuál es la colección adecuada?
+	 * ï¿½Cuï¿½l es la colecciï¿½n adecuada?
 	 */
-	
-	
-	
+	HashSet<Producto> productos;
+
+	public Catalogo() {
+		productos = new HashSet<Producto>();
+	}
+
 	/*
-	 * Agregar producto al catálogo.
-	 * No se permiten Productos duplicados. Criterio: número de Producto. 
+	 * Agregar producto al catï¿½logo. No se permiten Productos duplicados. Criterio:
+	 * nï¿½mero de Producto.
 	 */
 	public Boolean agregarProducto(Producto producto, Integer cantidad) {
-		return null;
-		
+		Boolean anadido = null;
+		for (int i = 0; i < cantidad; i++) {
+			anadido = productos.add(producto);
+		}
+		return anadido;
 	}
-	
+
 	/*
-	 * Remueve Producto del Catálogo.
-	 * Lanza una Excepción si el Producto no se encuentra en el Catálogo.
+	 * Remueve Producto del Catï¿½logo. Lanza una Excepciï¿½n si el Producto no se
+	 * encuentra en el Catï¿½logo.
 	 */
-	public Boolean quitarProducto(Producto producto) {
-		return null;		
+	public Boolean quitarProducto(Producto producto) throws ProductoNoEncontradoException {
+		Boolean productoQuitado = false;
+		if (!productos.contains(producto)) {
+			productoQuitado = false;
+			new ProductoNoEncontradoException("Producto sin stock");
+		} else if (productos.contains(producto)) {
+			productos.remove(producto);
+			productoQuitado = true;
+		}
+		return productoQuitado;
 	}
-	
+
 	/*
 	 * Descuenta la cantidad deseada de producto del Stock.
 	 */
-	
-	public Boolean removerStock(Producto producto, Integer cantidad) {
-		return null;
+
+	public HashSet<Producto> getProductos() {
+		return productos;
 	}
-	
+
+	public Boolean removerStock(Producto producto, Integer cantidad) throws ProductoNoEncontradoException {
+		Integer cantidadEnStock = 0;
+		for (Producto i : productos) {
+			if (i.equals(producto)) {
+				cantidadEnStock++;
+			}
+		}
+		if (cantidadEnStock >= cantidad) {
+			Integer vecesRemovido = cantidad;
+			do {
+				quitarProducto(producto);
+				vecesRemovido--;
+			} while (vecesRemovido == 0);
+			return true;
+		} else
+			return false;
+	}
+
 	/*
 	 * Devuleve la cantidad de Productos en existencia.
 	 */
 	public Integer obtenerCantidad(Producto producto) {
-		return null;
+		Integer cantidad = 0;
+		for (Producto i : productos) {
+			if (i.equals(producto)) {
+				cantidad++;
+			}
+		}
+		return cantidad;
 	}
 }
