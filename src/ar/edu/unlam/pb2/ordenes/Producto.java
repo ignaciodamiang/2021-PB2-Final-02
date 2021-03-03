@@ -8,35 +8,37 @@ public class Producto {
 	/*
 	 * Se crea un producto.
 	 */
-	public Producto(Integer numero, String descripcion, Double precio) {		
+	public Producto(Integer numero, String descripcion, Double precio) {
+		this.numero = numero;
+		this.descripcion = descripcion;
+		this.precio = precio;
 	}
-	
+
 	/*
 	 * Retorna el precio unitario del Producto.
-	*/
+	 */
 	public Double getPrecio() {
-		return null;
+		return this.precio;
 	}
-	
+
 	/*
-	 * Devulve el monto del impuesto.
-	 * Todo producto tiene un 21% de impuesto.
+	 * Devulve el monto del impuesto. Todo producto tiene un 21% de impuesto.
 	 */
 	public Double getImpuesto() {
-		return null;
+		return this.precio * 0.21;
 	}
-	
+
 	/*
-	 * Devuelve la descripción del Producto
+	 * Devuelve la descripciï¿½n del Producto
 	 */
 	public String getDescripcion() {
 		return this.descripcion;
 	}
-	
+
 	/*
 	 * Devuelve el precio del producto luego de aplicar el impuesto.
 	 */
 	public Double getPrecioFinal() {
-		return null;
+		return this.precio + (this.precio * 0.21);
 	}
 }
