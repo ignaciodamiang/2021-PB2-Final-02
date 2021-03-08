@@ -35,9 +35,7 @@ public class LineaOrden {
 
 	@Override
 	public String toString() {
-		return "LineaOrden [" + (item != null ? "item=" + item + ", " : "")
-				+ (cantidad != null ? "cantidad=" + cantidad : "") + "]";
+		return "\nItem: " + item + " - " + "Cantidad: " + cantidad + ".";
 	}
-
 
 }
