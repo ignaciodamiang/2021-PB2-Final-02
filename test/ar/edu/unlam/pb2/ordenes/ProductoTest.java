@@ -1,8 +1,7 @@
 package ar.edu.unlam.pb2.ordenes;
 
-import static org.junit.Assert.assertEquals;
 
-import java.util.HashSet;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 

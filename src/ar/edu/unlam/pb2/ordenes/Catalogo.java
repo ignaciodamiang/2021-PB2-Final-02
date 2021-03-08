@@ -1,8 +1,6 @@
 package ar.edu.unlam.pb2.ordenes;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.HashMap;
 
 /*
  * Mantiene una colecci�n de Productos, los cuales no pueden
@@ -14,10 +12,10 @@ public class Catalogo {
 	/*
 	 * �Cu�l es la colecci�n adecuada?
 	 */
-	HashSet<Producto> productos;
+	HashMap<Producto, Integer> productos;
 
 	public Catalogo() {
-		productos = new HashSet<Producto>();
+		productos = new HashMap<Producto, Integer>();
 	}
 
 	/*
@@ -25,11 +23,18 @@ public class Catalogo {
 	 * n�mero de Producto.
 	 */
 	public Boolean agregarProducto(Producto producto, Integer cantidad) {
-		Boolean anadido = null;
-		for (int i = 0; i < cantidad; i++) {
-			anadido = productos.add(producto);
-		}
-		return anadido;
+		if (!productos.containsKey(producto)) {
+			productos.put(producto, cantidad);
+			return true;
+		} else if (productos.containsKey(producto) && productos.get(producto) == null) {
+			productos.put(producto, cantidad);
+			return true;
+		} else if (productos.containsKey(producto) && productos.get(producto) != null) {
+			Integer cantidadEnStock = obtenerCantidad(producto);
+			productos.put(producto, cantidadEnStock + cantidad);
+			return true;
+		} else
+			return false;
 	}
 
 	/*
@@ -37,53 +42,39 @@ public class Catalogo {
 	 * encuentra en el Cat�logo.
 	 */
 	public Boolean quitarProducto(Producto producto) throws ProductoNoEncontradoException {
-		Boolean productoQuitado = false;
-		if (!productos.contains(producto)) {
-			productoQuitado = false;
-			new ProductoNoEncontradoException("Producto sin stock");
-		} else if (productos.contains(producto)) {
-			productos.remove(producto);
-			productoQuitado = true;
-		}
-		return productoQuitado;
-	}
-
-	/*
-	 * Descuenta la cantidad deseada de producto del Stock.
-	 */
-
-	public HashSet<Producto> getProductos() {
-		return productos;
-	}
-
-	public Boolean removerStock(Producto producto, Integer cantidad) throws ProductoNoEncontradoException {
-		Integer cantidadEnStock = 0;
-		for (Producto i : productos) {
-			if (i.equals(producto)) {
-				cantidadEnStock++;
-			}
-		}
-		if (cantidadEnStock >= cantidad) {
-			Integer vecesRemovido = cantidad;
-			do {
-				quitarProducto(producto);
-				vecesRemovido--;
-			} while (vecesRemovido == 0);
+		if (!productos.containsKey(producto)) {
+			new ProductoNoEncontradoException("Este producto no se encuentra en el catalogo");
+			return false;
+		} else if (productos.containsKey(producto) && productos.get(producto) > 0) {
+			productos.put(producto, (productos.get(producto) - 1));
 			return true;
 		} else
 			return false;
 	}
 
 	/*
+	 * Descuenta la cantidad deseada de producto del Stock.
+	 */
+
+	public Boolean removerStock(Producto producto, Integer cantidad) throws ProductoNoEncontradoException {
+		if (productos.containsKey(producto) && productos.get(producto) != null) {
+			Integer cantidadEnStock = productos.get(producto);
+			if (cantidadEnStock >= cantidad) {
+				cantidadEnStock = cantidadEnStock - cantidad;
+				productos.put(producto, cantidadEnStock);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/*
 	 * Devuleve la cantidad de Productos en existencia.
 	 */
 	public Integer obtenerCantidad(Producto producto) {
-		Integer cantidad = 0;
-		for (Producto i : productos) {
-			if (i.equals(producto)) {
-				cantidad++;
-			}
-		}
-		return cantidad;
+		if (productos.containsKey(producto)) {
+			return productos.get(producto);
+		} else
+			return null;
 	}
 }

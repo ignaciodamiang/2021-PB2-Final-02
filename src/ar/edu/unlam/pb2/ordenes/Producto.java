@@ -41,4 +41,37 @@ public class Producto {
 	public Double getPrecioFinal() {
 		return this.precio + (this.precio * 0.21);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Producto))
+			return false;
+		Producto other = (Producto) obj;
+		if (numero == null) {
+			if (other.numero != null)
+				return false;
+		} else if (!numero.equals(other.numero))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Producto [" + (numero != null ? "numero=" + numero + ", " : "")
+				+ (descripcion != null ? "descripcion=" + descripcion + ", " : "")
+				+ (precio != null ? "precio=" + precio : "") + "]";
+	}
+	
+	
+	
 }
