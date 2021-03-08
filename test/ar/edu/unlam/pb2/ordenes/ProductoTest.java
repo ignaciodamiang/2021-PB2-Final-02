@@ -19,7 +19,7 @@ public class ProductoTest {
 	public void queSePuedePedirImpuestoSobreProductoDeLujo() {
 		ProductoDeLujo producto = new ProductoDeLujo(1, "producto de lujo", 1000.00);
 		Double obtenido = producto.getImpuesto();
-		Double esperado = 391.5;
+		Double esperado = 360.0;
 		assertEquals(esperado, obtenido);
 	}
 

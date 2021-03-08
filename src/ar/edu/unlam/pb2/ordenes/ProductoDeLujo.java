@@ -9,7 +9,7 @@ public class ProductoDeLujo extends Producto {
 
 	ProductoDeLujo(Integer numero, String descripcion, Double precio) {
 		super(numero, descripcion, precio);
-		this.precioEspecial = this.getPrecioFinal() * 1.15;
+		this.precioEspecial = this.getPrecio() * 1.36;
 	}
 	/*
 	 * Se le aplica el 21% y un 15% de impuesto adicional por derechos de
