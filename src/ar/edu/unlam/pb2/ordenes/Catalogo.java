@@ -1,80 +1,49 @@
 package ar.edu.unlam.pb2.ordenes;
 
-import java.util.HashMap;
+import java.util.Set;
 
 /*
- * Mantiene una colecciï¿½n de Productos, los cuales no pueden
- * estar duplicados. Ademï¿½s, por cada Producto se desea mantener 
+ * Mantiene una colección de Productos, los cuales no pueden
+ * estar duplicados. Además, por cada Producto se desea mantener 
  * la cantidad del mismo en Stock,
  */
 public class Catalogo {
-
+	
 	/*
-	 * ï¿½Cuï¿½l es la colecciï¿½n adecuada?
+	 * ¿Cuál es la colección adecuada?
 	 */
-	HashMap<Producto, Integer> productos;
-
-	public Catalogo() {
-		productos = new HashMap<Producto, Integer>();
-	}
-
+	
+	
+	
 	/*
-	 * Agregar producto al catï¿½logo. No se permiten Productos duplicados. Criterio:
-	 * nï¿½mero de Producto.
+	 * Agregar producto al catálogo.
+	 * No se permiten Productos duplicados. Criterio: número de Producto. 
 	 */
 	public Boolean agregarProducto(Producto producto, Integer cantidad) {
-		if (!productos.containsKey(producto)) {
-			productos.put(producto, cantidad);
-			return true;
-		} else if (productos.containsKey(producto) && productos.get(producto) == null) {
-			productos.put(producto, cantidad);
-			return true;
-		} else if (productos.containsKey(producto) && productos.get(producto) != null) {
-			Integer cantidadEnStock = obtenerCantidad(producto);
-			productos.put(producto, cantidadEnStock + cantidad);
-			return true;
-		} else
-			return false;
+		return null;
+		
 	}
-
+	
 	/*
-	 * Remueve Producto del Catï¿½logo. Lanza una Excepciï¿½n si el Producto no se
-	 * encuentra en el Catï¿½logo.
+	 * Remueve Producto del Catálogo.
+	 * Lanza una Excepción si el Producto no se encuentra en el Catálogo.
 	 */
-	public Boolean quitarProducto(Producto producto) throws ProductoNoEncontradoException {
-		if (!productos.containsKey(producto)) {
-			new ProductoNoEncontradoException("Este producto no se encuentra en el catalogo");
-			return false;
-		} else if (productos.containsKey(producto) && productos.get(producto) > 0) {
-			productos.put(producto, (productos.get(producto) - 1));
-			return true;
-		} else
-			return false;
+	public Boolean quitarProducto(Producto producto) {
+		return null;		
 	}
-
+	
 	/*
 	 * Descuenta la cantidad deseada de producto del Stock.
 	 */
-
-	public Boolean removerStock(Producto producto, Integer cantidad) throws ProductoNoEncontradoException {
-		if (productos.containsKey(producto) && productos.get(producto) != null) {
-			Integer cantidadEnStock = productos.get(producto);
-			if (cantidadEnStock >= cantidad) {
-				cantidadEnStock = cantidadEnStock - cantidad;
-				productos.put(producto, cantidadEnStock);
-				return true;
-			}
-		}
-		return false;
+	
+	public Boolean removerStock(Producto producto, Integer cantidad) {
+		return null;
 	}
-
+	
 	/*
 	 * Devuleve la cantidad de Productos en existencia.
 	 */
 	public Integer obtenerCantidad(Producto producto) {
-		if (productos.containsKey(producto)) {
-			return productos.get(producto);
-		} else
-			return null;
+		return null;
 	}
 }
